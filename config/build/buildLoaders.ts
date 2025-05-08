@@ -4,6 +4,22 @@ import { BuildOptions } from "./types/config";
 
 export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
 
+  // Загрузка файлов
+  const fileLoader = {
+    test: /\.(png|jpe?g|gif|woff2|woff)$/i,
+    use: [
+      {
+        loader: 'file-loader',
+      },
+    ],
+  }
+
+  // Загрузка svg
+  const svgLoader = {
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+  }
+
   // Если не используем typescript, то нужен babel для транспиляции
   const typescriptLoader = {
     // чтобы ловить файлы ts/tsx
@@ -37,6 +53,8 @@ export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
   };
 
   return [
+    fileLoader,
+    svgLoader,
     typescriptLoader,
     cssLoaders,
   ]
