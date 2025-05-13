@@ -7,6 +7,9 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
     port: options.port,
     open: true,
     // позволяет открывать по роуту
-    historyApiFallback: true
+    historyApiFallback: true,
+
+    // Hot Module Replacement
+    hot: true
   }
 }
